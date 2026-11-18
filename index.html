@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Fiche & Combat pour Les Aventures de Billy et du Pyro-barbare</title>
+    <style>
+        :root {
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            color-scheme: light;
+            --bg: #efe6d2;
+            --card: #fbf6ea;
+            --ink: #2a2118;
+            --mut: #7a6a55;
+            --line: #b9a784;
+            --acc: #8b2e1f;
+            --on: #8b2e1f
+        }
+
+        @media (prefers-color-scheme:dark) {
+            :root:not([data-theme="light"]) {
+                color-scheme: dark;
+                --bg: #1c1814;
+                --card: #2a241d;
+                --ink: #eadfc9;
+                --mut: #a89878;
+                --line: #5a4d3a;
+                --acc: #e0805f;
+                --on: #e0805f
+            }
+        }
+
+        :root[data-theme="dark"] {
+            color-scheme: dark;
+            --bg: #1c1814;
+            --card: #2a241d;
+            --ink: #eadfc9;
+            --mut: #a89878;
+            --line: #5a4d3a;
+            --acc: #e0805f;
+            --on: #e0805f
+        }
+
+        html {
+            scroll-padding-top: env(safe-area-inset-top, 0px)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font: 16px/1.4 Georgia, "Times New Roman", serif
+        }
+
+        main {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 12px
+        }
+
+        nav {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px
+        }
+
+        button {
+            font: inherit;
+            background: var(--card);
+            color: var(--ink);
+            border: 2px solid var(--ink);
+            border-radius: 6px;
+            padding: 6px 12px;
+            cursor: pointer
+        }
+
+        button.on,
+        button.p {
+            background: var(--acc);
+            color: #fff;
+            border-color: var(--acc)
+        }
+
+        .card {
+            background: var(--card);
+            border: 2px solid var(--ink);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 12px
+        }
+
+        h3 {
+            margin: 0 0 8px;
+            text-align: center;
+            font-variant: small-caps;
+            letter-spacing: .05em
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px
+        }
+
+        .g3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px
+        }
+
+        .g2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px
+        }
+
+        label {
+            font-size: 12px;
+            color: var(--mut);
+            font-style: italic;
+            display: block
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            font: inherit;
+            background: transparent;
+            color: var(--ink);
+            border: 0;
+            border-bottom: 1px solid var(--line);
+            padding: 3px
+        }
+
+        textarea {
+            border: 1px solid var(--line);
+            border-radius: 4px;
+            min-height: 90px
+        }
+
+        .tot {
+            text-align: center;
+            font-size: 12px;
+            color: var(--mut)
+        }
+
+        .tot b {
+            display: block;
+            font-size: 26px;
+            color: var(--ink)
+        }
+
+        .track {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 8px
+        }
+
+        .track i {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--ink);
+            border-radius: 3px;
+            cursor: pointer
+        }
+
+        .track i.on {
+            background: var(--on)
+        }
+
+        .cnt {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px
+        }
+
+        .cnt b {
+            font-size: 28px;
+            min-width: 44px;
+            text-align: center
+        }
+
+        .cnt button {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            font-size: 20px
+        }
+
+        ul {
+            list-style: none;
+            margin: 0 0 6px;
+            padding: 0
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dotted var(--line);
+            padding: 3px 0
+        }
+
+        li button {
+            padding: 0 8px;
+            border-width: 1px
+        }
+
+        .add {
+            display: flex;
+            gap: 6px
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 14px
+        }
+
+        td,
+        th {
+            border: 1px solid var(--line);
+            padding: 4px;
+            text-align: center
+        }
+
+        .wrap {
+            overflow-x: auto
+        }
+
+        .hi {
+            background: var(--acc);
+            color: #fff
+        }
+
+        .banner {
+            background: var(--acc);
+            color: #fff;
+            text-align: center;
+            padding: 8px;
+            border-radius: 6px;
+            margin: 8px 0;
+            font-weight: bold
+        }
+
+        .btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 8px 0
+        }
+
+        small {
+            color: var(--mut)
+        }
+    </style>
+</head>
+
+<body>
+    <main id="app"></main>
+    <script>
+        const D = {
+            nm: "", car: "", st: {hab: {b: 2, c: 0, m: 0, x: 0}, adr: {b: 1, c: 0, m: 0, x: 0}, end: {b: 2, c: 0, m: 0, x: 0}, cha: {b: 3, c: 0, m: 0, x: 0}},
+            sec: {deg: 0, arm: 0, cri: 0, pv: 0, x: 0}, pv: 0, ch: 0, imp: 0, ric: 0, luc: 0, mat: [], obj: [], notes: "",
+            cb: {an: "", ah: 0, apv: 0, res: null, log: []}
+        };
+        let S = JSON.parse(JSON.stringify(D)), tab = "fiche", box = "";
+        try {const r = localStorage.getItem("lldv"); if (r) S = mg(D, JSON.parse(r))} catch (e) { }
+        function mg(a, b) {const o = Array.isArray(a) ? [] : {}; for (const k in a) o[k] = (a[k] && typeof a[k] == "object" && !Array.isArray(a[k]) && b && typeof b[k] == "object" && b[k]) ? mg(a[k], b[k]) : (b && k in b ? b[k] : a[k]); return o}
+        const save = () => {try {localStorage.setItem("lldv", JSON.stringify(S))} catch (e) { } };
+        const g = p => p.split(".").reduce((o, k) => o && o[k], S);
+        const st = (p, v) => {const a = p.split("."), l = a.pop(); a.reduce((o, k) => o[k], S)[l] = v};
+        const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+        const n = v => +v || 0;
+        const tot = k => {const s = S.st[k], t = n(s.b) + n(s.c) + n(s.m) + n(s.x); return k == "adr" ? Math.min(5, t) : t};
+        const pvmax = () => n(S.sec.pv) + n(S.sec.x);
+        const sit = d => d <= -5 ? "Désavantage lourd" : d <= -3 ? "Désavantage" : d <= -1 ? "Désavantage léger" : d == 0 ? "Égalité" : d <= 2 ? "Avantage léger" : d <= 4 ? "Avantage" : "Avantage lourd";
+        const flee = d => d <= -5 ? 5 : d <= -3 ? 3 : d <= -1 ? 2 : d <= 4 ? 1 : 0;
+        const T = ["0-12,1-8,1-7,1-6,2-6,2-6,3-6,3-5,3-5,3-5,3-4,3-4,4-4,4-3,4-3", "0-9,1-7,1-6,2-6,2-5,2-5,3-5,3-4,3-4,3-4,3-3,3-3,4-3,5-2,5-2", "1-8,1-6,1-5,2-5,2-4,2-4,3-4,3-3,3-3,3-3,4-3,4-2,5-2,5-2,6-2", "2-6,2-5,2-5,2-4,3-4,3-3,3-3,3-3,4-3,4-2,4-2,5-2,5-1,6-1,8-1", "2-5,2-5,3-4,3-3,3-3,4-3,4-3,4-3,5-3,5-2,5-2,6-2,6-1,7-1,9-0", "3-4,3-4,4-4,4-3,4-3,5-3,5-3,5-3,6-3,6-2,6-2,6-1,7-1,8-1,12-0"].map(r => r.split(",").map(x => x.split("-").map(Number)));
+        const cd = () => Math.max(-7, Math.min(7, tot("hab") - n(S.cb.ah)));
+
+        const inp = (p, l, t = "number") => `<label>${l}<input type="${t}" data-k="${p}" value="${esc(g(p))}"></label>`;
+        const track = (p, c, l = "") => `<div class="track">${l ? `<small>${l}</small>` : ""}${Array.from({length: c}, (_, i) => `<i data-act="tk" data-p="${p}" data-n="${i + 1}" class="${i < g(p) ? "on" : ""}"></i>`).join("")}</div>`;
+        const cnt = p => `<div class="cnt"><button data-act="inc" data-p="${p}" data-d="-1">−</button><b>${g(p)}</b><button data-act="inc" data-p="${p}" data-d="1">+</button></div>`;
+        const list = (p, l, id) => `<div class="card"><h3>${l}</h3><ul>${g(p).map((x, i) => `<li>${esc(x)}<button data-act="del" data-p="${p}" data-n="${i}">✕</button></li>`).join("")}</ul><div class="add"><input id="${id}" placeholder="Ajouter…" data-add="${p}"><button data-act="add" data-p="${p}" data-id="${id}">+</button></div></div>`;
+        const stat = (k, t) => `<div class="card"><h3>${t}</h3><div class="g3">${inp(`st.${k}.b`, "Base")}${inp(`st.${k}.c`, "Carac.")}${inp(`st.${k}.m`, "Matériel")}</div><div class="tot">Total<b data-out="${k}"></b></div>${k == "adr" ? "<small>Ne peut dépasser 5</small>" : ""}${track(`st.${k}.x`, 8, "+1")}</div>`;
+
+        function fiche() {
+            return `<div class="card"><h3>Caractère</h3>${inp("nm", "Nom", "text")}<textarea data-k="car" placeholder="Description, traits…">${esc(S.car)}</textarea></div>
+<div class="grid">${stat("hab", "Habileté")}${stat("adr", "Adresse")}${stat("end", "Endurance")}${stat("cha", "Chance")}</div>
+<div class="grid"><div class="card"><h3>Stat. secondaires</h3><div class="g3">${inp("sec.deg", "Dégâts")}${inp("sec.arm", "Armure")}${inp("sec.cri", "Critique")}</div><div class="g2">${inp("sec.pv", "PV max (base)")}<div class="tot">PV max<b data-out="pvm"></b></div></div>${track("sec.x", 24, "+1")}</div>
+<div class="card"><h3>Suivi des points de vie</h3>${cnt("pv")}<div class="tot">sur <span data-out="pvm"></span></div></div>
+<div class="card"><h3>Suivi des points de chance</h3>${cnt("ch")}</div></div>
+<div class="grid"><div class="card"><h3>Impulsion</h3>${track("imp", 24)}</div><div class="card"><h3>Lucidité</h3>${track("luc", 24)}</div><div class="card"><h3>Richesse</h3>${track("ric", 24)}</div></div>
+<div class="grid">${list("mat", "Matériel", "i1")}${list("obj", "Objets récupérés", "i2")}<div class="card"><h3>Notes d’aventure</h3><textarea style="min-height:160px" data-k="notes">${esc(S.notes)}</textarea></div></div>
+<div class="card"><div class="btns"><button data-act="exp">Exporter</button><button data-act="imp">Importer</button><button data-act="reset">Tout réinitialiser</button></div>${box !== "" ? `<textarea id="box">${esc(box)}</textarea>` : ""}<small>Sauvegarde automatique dans ce navigateur.</small></div>`
+        }
+
+        function combat() {
+            const c = S.cb, d = cd(), r = c.res, last = c.log[c.log.length - 1];
+            return `<div class="card"><h3>Combat</h3><div class="g3">${inp("cb.an", "Adversaire", "text")}${inp("cb.ah", "Habileté adv.")}${inp("cb.apv", "PV adv.")}</div>
+<p>Habileté de Billy <b data-out="hab"></b> · différence <b>${d > 0 ? "+" : ""}${d}</b> · <b>${sit(d)}</b> · fuite : <b>${flee(d)}</b> chance</p>
+<div class="g2"><div class="card"><h3>PV Billy</h3>${cnt("pv")}</div><div class="card"><h3>PV ${esc(c.an) || "adversaire"}</h3>${cnt("cb.apv")}</div></div>
+${last && n(c.apv) <= 0 ? `<div class="banner">Adversaire vaincu !</div>` : ""}${last && n(S.pv) <= 0 ? `<div class="banner">Billy est à terre…</div>` : ""}
+<div class="btns"><button class="p" data-act="roll" data-d="0">🎲 Lancer le dé</button>${[1, 2, 3, 4, 5, 6].map(i => `<button data-act="roll" data-d="${i}">${i}</button>`).join("")}<button data-act="flee">Fuir (−${flee(d)} chance)</button><button data-act="clr">Nouveau combat</button></div>
+${r ? `<div class="card"><h3>Dé ${r.d} · ${sit(r.diff)}</h3><div class="g2">${inp("cb.res.dealt", "Dégâts infligés")}${inp("cb.res.taken", "Dégâts subis")}</div><small>Modifiable (dégâts, armure…) avant d’appliquer.</small><div class="btns"><button class="p" data-act="apply">Appliquer</button></div></div>` : ""}
+${c.log.length ? `<div class="wrap"><table><tr><th>Tour</th><th>Dé</th><th>Situation</th><th>Infligés</th><th>Subis</th><th>PV Billy</th><th>PV adv.</th></tr>${c.log.map(l => `<tr><td>${l.t}</td><td>${l.d}</td><td>${l.s}</td><td>${l.dl}</td><td>${l.tk}</td><td>${l.pb}</td><td>${l.pa}</td></tr>`).join("")}</table></div>` : ""}</div>
+<div class="card"><h3>Butin</h3><div class="add"><input id="loot" placeholder="Objet obtenu…" data-add="obj"><button data-act="add" data-p="obj" data-id="loot">+</button></div><ul>${S.obj.map((x, i) => `<li>${esc(x)}<button data-act="del" data-p="obj" data-n="${i}">✕</button></li>`).join("")}</ul><div class="cnt">Richesse <button data-act="inc" data-p="ric" data-d="-1">−</button><b>${S.ric}</b><button data-act="inc" data-p="ric" data-d="1">+</button></div></div>`
+        }
+
+        function table() {const d = cd(); return `<div class="card"><h3>Table des situations</h3><div class="wrap"><table><tr><th>Diff.</th>${Array.from({length: 15}, (_, i) => `<th class="${i - 7 == d ? "hi" : ""}">${i - 7}</th>`).join("")}</tr><tr><th>Fuite</th>${Array.from({length: 15}, (_, i) => `<td class="${i - 7 == d ? "hi" : ""}">${flee(i - 7)}</td>`).join("")}</tr>${T.map((r, j) => `<tr><th>${j + 1}</th>${r.map((v, i) => `<td class="${i - 7 == d ? "hi" : ""}">${v[0]}–${v[1]}</td>`).join("")}</tr>`).join("")}</table></div><small>Dégâts de Billy – dégâts de l’adversaire. Colonne surlignée : différence actuelle.</small></div>`}
+
+        function render() {app.innerHTML = `<nav>${[["fiche", "Fiche"], ["combat", "Combat"], ["table", "Table"]].map(([k, l]) => `<button data-act="tab" data-n="${k}" class="${tab == k ? "on" : ""}">${l}</button>`).join("")}</nav>` + (tab == "fiche" ? fiche() : tab == "combat" ? combat() : table()); calc()}
+        function calc() {document.querySelectorAll("[data-out]").forEach(e => {const k = e.dataset.out; e.textContent = k == "pvm" ? pvmax() : tot(k)})}
+
+        document.addEventListener("input", e => {const k = e.target.dataset.k; if (!k) return; st(k, e.target.type == "number" ? e.target.value : e.target.value); save(); calc()});
+        document.addEventListener("keydown", e => {if (e.key == "Enter" && e.target.dataset.add) {e.target.nextElementSibling.click()} });
+        document.addEventListener("click", e => {
+            const b = e.target.closest("[data-act]"); if (!b) return; const a = b.dataset.act, p = b.dataset.p, c = S.cb;
+            if (a == "tab") tab = b.dataset.n;
+            else if (a == "tk") {const v = n(g(p)), k = +b.dataset.n; st(p, v == k ? k - 1 : k)}
+            else if (a == "inc") {st(p, Math.max(0, n(g(p)) + +b.dataset.d))}
+            else if (a == "del") g(p).splice(+b.dataset.n, 1);
+            else if (a == "add") {const i = document.getElementById(b.dataset.id); if (i.value.trim()) g(p).push(i.value.trim())}
+            else if (a == "roll") {const d = +b.dataset.d || 1 + Math.floor(Math.random() * 6), df = cd(), v = T[d - 1][df + 7]; c.res = {d, diff: df, dealt: v[0], taken: v[1]}}
+            else if (a == "apply" && c.res) {const r = c.res; S.pv = Math.max(0, n(S.pv) - n(r.taken)); c.apv = Math.max(0, n(c.apv) - n(r.dealt)); c.log.push({t: c.log.length + 1, d: r.d, s: sit(r.diff), dl: n(r.dealt), tk: n(r.taken), pb: S.pv, pa: c.apv}); c.res = null}
+            else if (a == "flee") {const f = flee(cd()); S.ch = Math.max(0, n(S.ch) - f); c.log.push({t: c.log.length + 1, d: "–", s: "Fuite (−" + f + " chance)", dl: 0, tk: 0, pb: S.pv, pa: c.apv})}
+            else if (a == "clr") {c.log = []; c.res = null}
+            else if (a == "exp") {box = JSON.stringify(S)}
+            else if (a == "imp") {const t = document.getElementById("box"); if (t && t.value) try {S = mg(D, JSON.parse(t.value)); box = ""} catch (x) {alert("JSON invalide")} else box = " "}
+            else if (a == "reset") {if (confirm("Tout effacer ?")) {S = JSON.parse(JSON.stringify(D)); box = ""} }
+            save(); render()
+        });
+        render();
+    </script>
+</body>
+
+</html>
